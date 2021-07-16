@@ -1,9 +1,9 @@
-import {
+import React, {
   CSSProperties,
-  useCallback,
   useEffect,
   useImperativeHandle,
   useState,
+  useCallback,
 } from 'react';
 
 import { forwardRefWithAs } from '../../utils';
@@ -11,8 +11,8 @@ import { forwardRefWithAs } from '../../utils';
 import Input from './Input';
 
 interface EditableColumnProps {
-  onSave?: (element: any) => void;
-  onEditStart?: (element: any) => void;
+  onSave?: (element: React.KeyboardEvent<HTMLInputElement>) => void;
+  onEditStart?: (element: React.MouseEvent<HTMLDivElement>) => void;
   type?: 'number' | 'text';
   editStatus?: boolean;
   value: string;
@@ -44,29 +44,30 @@ function EditableColumn(props: EditableColumnProps, ref) {
     },
   }));
 
-  const editModeHandler = useCallback(
-    (flag, event = null) => {
-      if (!flag) {
-        if (event.keyCode === 13) {
-          // when press Enter
-          onSave(event);
-          enableEdit(flag);
-        } else if (event.keyCode === 27) {
-          // when press Escape
-          enableEdit(flag);
-        }
-      } else {
-        onEditStart(event);
-        enableEdit(flag);
+  const editModeHandlerKeyboard = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        onSave(event);
+        enableEdit(false);
+      } else if (event.key === 'Escape') {
+        enableEdit(false);
       }
     },
-    [onEditStart, onSave],
+    [onSave],
+  );
+
+  const editModeHandlerMouse = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      onEditStart(event);
+      enableEdit(true);
+    },
+    [onEditStart],
   );
 
   return (
     <div
       style={{ display: 'table', width: '100%', height: '100%', ...style }}
-      onDoubleClick={(event) => editModeHandler(true, event)}
+      onDoubleClick={(evt) => editModeHandlerMouse(evt)}
     >
       {!enabled && (
         <span style={{ display: 'table-cell', verticalAlign: 'middle' }}>
@@ -79,7 +80,7 @@ function EditableColumn(props: EditableColumnProps, ref) {
             enableAutoSelect
             value={value}
             type={type}
-            onKeyDown={(e) => editModeHandler(false, e)}
+            onKeyDown={(evt) => editModeHandlerKeyboard(evt)}
           />
         </div>
       )}

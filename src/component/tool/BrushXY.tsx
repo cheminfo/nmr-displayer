@@ -53,8 +53,8 @@ interface BrushXYProps {
     endX?: number;
     endY?: number;
   };
-  width?: any;
-  height?: any;
+  width?: number;
+  height?: number;
 }
 
 export default function BrushXY({

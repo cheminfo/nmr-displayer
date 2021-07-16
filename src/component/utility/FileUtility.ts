@@ -55,9 +55,12 @@ function extractFileMetaFromPath(path) {
  * @param {boolean} options.asBuffer
  * @returns
  */
-function loadFiles(acceptedFiles, options: { asBuffer?: boolean } = {}) {
+function loadFiles<T = unknown>(
+  acceptedFiles,
+  options: { asBuffer?: boolean } = {},
+) {
   return Promise.all(
-    [].map.call(acceptedFiles, (file: any) => {
+    ([] as Array<T>).map.call(acceptedFiles, (file: any) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onabort = (e) => reject(e);
@@ -77,7 +80,7 @@ function loadFiles(acceptedFiles, options: { asBuffer?: boolean } = {}) {
         }
       });
     }),
-  );
+  ) as Promise<Array<T>>;
 }
 
 async function loadFilesFromZip(files, options: { asBuffer?: boolean } = {}) {

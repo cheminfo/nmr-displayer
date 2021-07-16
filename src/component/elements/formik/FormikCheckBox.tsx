@@ -8,7 +8,6 @@ interface FormikCheckBoxProps extends CheckBoxProps {
   name: string;
   label?: string;
   className?: string;
-  onChange?: (element: any) => void;
   reverse?: boolean;
 }
 
@@ -26,7 +25,7 @@ function FormikCheckBox(props: FormikCheckBoxProps) {
   const value = reverse ? !lodashGet(values, name) : lodashGet(values, name);
 
   const changeHandler = useCallback(
-    (e) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       e.persist();
       onChange(e);
       setFieldValue(name, reverse ? value : !value);

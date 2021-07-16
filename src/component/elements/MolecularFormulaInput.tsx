@@ -33,7 +33,7 @@ const inputStyle = css`
 `;
 
 interface MolecularFormulaInputProps {
-  onSave?: (element: any) => void;
+  onSave?: (element: string) => void;
   previousMF: string;
 }
 

@@ -34,9 +34,14 @@ const styles = css`
   }
 `;
 
+interface DropDownListItem {
+  key: string;
+  label: string;
+}
+
 interface DropDownListProps {
-  data: Array<any>;
-  onSelect: (element: any) => void;
+  data: Array<DropDownListItem>;
+  onSelect: (element: number) => void;
 }
 
 function DropDownList({ data = [], onSelect }: DropDownListProps) {

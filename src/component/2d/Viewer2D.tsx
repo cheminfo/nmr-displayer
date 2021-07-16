@@ -199,7 +199,7 @@ function Viewer2D({ emptyText = undefined }: Viewer2DProps) {
         )}
       </Fragment>
     );
-  }, [] as any);
+  });
 
   const [finalSize, setFinalSize] =
     useState<{ width: number; height: number }>();

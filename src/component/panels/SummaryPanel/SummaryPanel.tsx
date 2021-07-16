@@ -87,7 +87,7 @@ function SummaryPanel() {
   const [
     selectedAdditionalColumnsAtomType,
     setSelectedAdditionalColumnsAtomType,
-  ] = useState('-');
+  ] = useState<string>('-');
   const [showProtonsAsRows, setShowProtonsAsRows] = useState(false);
   const [filterIsActive, setFilterIsActive] = useState(false);
 

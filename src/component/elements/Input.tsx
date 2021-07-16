@@ -22,24 +22,16 @@ const styles: Record<'label' | 'input', CSSProperties> = {
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'style'> {
-  name?: string;
   label?: string;
-  value?: any;
   style?: {
-    label?: any;
-    input?: any;
-    container?: any;
+    label?: CSSProperties;
+    input?: CSSProperties;
+    container?: CSSProperties;
   };
-  className?: string;
-  type?: 'text' | 'number';
   enableAutoSelect?: boolean;
   debounceTime?: number;
-  onFocus?: (element?: any) => void;
-  onBlur?: () => void;
-  onChange?: (element: any) => void;
-  checkValue?: (element: any) => void;
-  onKeyDown?: (element: any) => void;
-  format?: () => (element: any) => any;
+  checkValue?: (element: number | string) => boolean;
+  format?: () => (element: string) => number | string;
 }
 
 const Input = forwardRefWithAs(
@@ -111,7 +103,7 @@ const Input = forwardRefWithAs(
           return true;
         }
 
-        const _value = e.target.value;
+        const _value: string = e.target.value;
         if (check(_value) && checkValue(_value)) {
           const formatValue = format();
 

@@ -6,18 +6,6 @@ import Input, { InputProps } from '../Input';
 
 interface FormikInputProps extends InputProps {
   name: string;
-  label?: string;
-  style?: {
-    label?: any;
-    input?: any;
-    container?: any;
-  };
-  onChange?: (element: any) => void;
-  checkValue?: (element: any) => void;
-  type?: 'text' | 'number';
-  className?: string;
-  value?: any;
-  format?: () => (element: any) => any;
   checkErrorAfterInputTouched?: boolean;
 }
 

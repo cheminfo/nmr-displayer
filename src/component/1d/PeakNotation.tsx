@@ -93,7 +93,7 @@ interface PeakNotationProps {
   sign: number;
   color: string;
   isActive: boolean;
-  value: any;
+  value: number;
   nucleus: string;
 }
 
@@ -134,24 +134,23 @@ function PeakNotation({
   }, [value]);
 
   const handleKeyDown = useCallback(
-    (event) => {
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') {
-        const newValue = parseFloat(event.target.value);
-        const oldValue = parseFloat(value);
-        const shiftValue = parseFloat(event.target.value) - parseFloat(value);
+        const newValue = event.currentTarget.valueAsNumber;
+        const shiftValue = newValue - value;
 
         handleOnPeakChange({
           id,
           value: newValue,
-          oldValue: oldValue,
+          oldValue: value,
           shiftValue: shiftValue,
         });
 
-        event.target.blur();
+        event.currentTarget.blur();
         setIsSelected(false);
-      } else if (event.keyCode === 27) {
+      } else if (event.key === 'Escape') {
         setValue(value);
-        event.target.blur();
+        event.currentTarget.blur();
         setIsSelected(false);
       }
     },

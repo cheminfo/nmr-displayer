@@ -9,7 +9,7 @@ function FormatNumber(value, format, prefix = '', suffix = '') {
 }
 
 type ReturnFunction = (
-  value: any,
+  value?: number | string,
   formatKey?: string,
   prefix?: string,
   suffix?: string,

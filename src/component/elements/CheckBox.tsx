@@ -7,7 +7,6 @@ export interface CheckBoxProps {
   name?: string;
   disabled?: boolean;
   checked?: boolean;
-  ref?: any;
 }
 
 const CheckBox = forwardRefWithAs(

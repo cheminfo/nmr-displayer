@@ -5,8 +5,8 @@ function getTopXScale(
   margin: { right: number; left: number },
   x: Array<number>,
 ) {
-  const xDomain = extent(x);
-  const scaleX = scaleLinear(extent(x) as any, [
+  const xDomain = extent<number>(x);
+  const scaleX = scaleLinear(extent(x) as number[], [
     width - margin.right,
     margin.left,
   ]);
@@ -24,7 +24,7 @@ function getLeftXScale(
 ) {
   const xDomain = extent(x);
 
-  const scaleX = scaleLinear(extent(x) as any, [
+  const scaleX = scaleLinear(extent(x) as number[], [
     width - margin.bottom,
     margin.top,
   ]);
@@ -36,7 +36,7 @@ function getLeftXScale(
 }
 
 function getYScale(height: number, y: Array<number>, margin = 10) {
-  return scaleLinear(extent(y) as any, [height - margin, margin]);
+  return scaleLinear(extent(y) as number[], [height - margin, margin]);
 }
 
 export { getTopXScale, getLeftXScale, getYScale };

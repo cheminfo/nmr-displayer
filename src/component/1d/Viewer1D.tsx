@@ -309,7 +309,7 @@ function Viewer1D({ emptyText = undefined }: Viewer1DProps) {
         )}
       </Fragment>
     );
-  }, [] as any);
+  });
 
   const [finalSize, setFinalSize] =
     useState<{ width: number; height: number }>();

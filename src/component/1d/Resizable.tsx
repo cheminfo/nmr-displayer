@@ -5,11 +5,16 @@ import Draggable from 'react-draggable';
 import { useChartData } from '../context/ChartContext';
 import { useScaleChecked } from '../context/ScaleContext';
 
+interface ResizedDrop {
+  from?: number;
+  to?: number;
+}
+
 interface ResizableProps {
   from: number;
   to: number;
-  onDrag?: (element: { from?: number; to?: number }) => void;
-  onDrop: (element: any) => void;
+  onDrag?: (element: ResizedDrop) => void;
+  onDrop: (element: ResizedDrop) => void;
 }
 
 function Resizable({ from, to, onDrag = () => null, onDrop }: ResizableProps) {
@@ -47,7 +52,7 @@ function Resizable({ from, to, onDrag = () => null, onDrop }: ResizableProps) {
           ? [scaleX().invert(e.layerX), to]
           : [to, scaleX().invert(e.layerX)];
 
-      let resized;
+      let resized: ResizedDrop;
       if (_range[1] > _range[0]) {
         resized = {
           from: _range[0],

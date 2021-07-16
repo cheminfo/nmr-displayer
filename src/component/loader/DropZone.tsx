@@ -121,7 +121,6 @@ function DropZone(props) {
         const selectedFilesByExtensions = files.filter(
           (file) => getFileExtension(file.name) === extension,
         );
-
         switch (extension) {
           case FILES_TYPES.MOL:
             loadFiles(selectedFilesByExtensions).then(
@@ -137,8 +136,11 @@ function DropZone(props) {
           case FILES_TYPES.NMRIUM:
           case FILES_TYPES.JSON:
             if (selectedFilesByExtensions.length === 1) {
-              loadFiles(selectedFilesByExtensions, { asBuffer: true }).then(
-                async (files: Array<any>) => {
+              loadFiles<{ binary: any }>(selectedFilesByExtensions, {
+                asBuffer: true,
+              }).then(
+                async (files) => {
+                  // InputFileFormat
                   const fileSignature = getFileSignature(files[0].binary);
                   if (fileSignature === FILES_SIGNATURES.ZIP) {
                     const unzipResult = await Zip.loadAsync(files[0].binary);

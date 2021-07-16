@@ -6,7 +6,6 @@ import ColorInput, { ColorInputProps } from '../ColorInput';
 
 interface FormikColorPickerProps extends ColorInputProps {
   name: string;
-  onColorChange?: (element: any) => void;
 }
 
 function FormikColorPicker(props: FormikColorPickerProps) {

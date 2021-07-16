@@ -1,3 +1,4 @@
+import { ScaleLinear } from 'd3';
 import { xyReduce, xyIntegral } from 'ml-spectra-processing';
 import { useCallback, useMemo } from 'react';
 
@@ -13,7 +14,7 @@ interface IntegralProps {
   y: Array<number>;
   xDomain: number[];
   isActive: boolean;
-  scaleY: any;
+  scaleY: ScaleLinear<any, any, never> | null;
   scaleX: any;
 }
 

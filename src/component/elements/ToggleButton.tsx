@@ -24,7 +24,7 @@ interface ToggleButtonProps {
   popupPlacement: string;
   style?: CSSProperties;
   defaultValue?: boolean;
-  onClick: (element: any) => void;
+  onClick: (element: boolean) => void;
   disabled?: boolean;
   children: ReactNode;
 }

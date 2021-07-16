@@ -7,7 +7,6 @@ interface ButtonToolTipProps
   popupTitle?: string;
   popupPlacement?: string;
   style?: CSSProperties;
-  onClick?: (e: any) => void;
   children?: ReactNode;
 }
 

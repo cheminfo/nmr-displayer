@@ -16,7 +16,17 @@ const defaultStyle: Record<string, CSSProperties> = {
   },
 };
 
-const defaultTransitionStyles: Record<string, any> = {
+type TransitionStyles = Record<
+  string,
+  Partial<{
+    entering: CSSProperties;
+    entered: CSSProperties;
+    exiting: CSSProperties;
+    exited: CSSProperties;
+  }>
+>;
+
+const defaultTransitionStyles: TransitionStyles = {
   [transitions.FADE]: {
     entering: { opacity: 0 },
     entered: { opacity: 1 },
@@ -32,7 +42,7 @@ const defaultTransitionStyles: Record<string, any> = {
 interface TransitionProps {
   children: ReactNode;
   type: string;
-  transitionStyles?: any;
+  transitionStyles?: TransitionStyles;
 }
 
 export default function Transtion({

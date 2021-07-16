@@ -29,7 +29,7 @@ const styles = css`
 `;
 
 interface DeleteButtonProps {
-  onDelete: (element: any) => void;
+  onDelete: (element: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   className?: string;
 }
 

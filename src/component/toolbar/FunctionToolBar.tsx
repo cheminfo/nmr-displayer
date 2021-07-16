@@ -80,7 +80,7 @@ function FunctionToolBarInner({
   ftCounter,
   fidCounter,
 }: FunctionToolBarInnerProps) {
-  const [option, setOption] = useState<any>();
+  const [option, setOption] = useState<string>('');
   const help = useHelp();
   const preferences = usePreferences();
 

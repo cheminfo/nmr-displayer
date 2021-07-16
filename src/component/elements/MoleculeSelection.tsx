@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from 'react';
 import MF from 'react-mf/lib/components/MF';
 import { MolfileSvgRenderer } from 'react-ocl/full';
 
+import { Molecule } from '../../data/molecules/Molecule';
+
 import NextPrev from './NextPrev';
 
 const toolbarStyle = css`
@@ -62,11 +64,11 @@ const moleculeContainerStyle = css`
 `;
 
 interface MoleculeSelectionProps {
-  molecules: any;
-  onChange: (element: any) => void;
+  molecules: Array<Molecule>;
+  onChange: (element: number) => void;
 }
 
-function MoleculeSelection(props: MoleculeSelectionProps) {
+export default function MoleculeSelection(props: MoleculeSelectionProps) {
   const { molecules, onChange = () => null } = props;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
@@ -98,14 +100,16 @@ function MoleculeSelection(props: MoleculeSelectionProps) {
           {molecules?.map((mol, index) => (
             <div key={mol.key} className="slider">
               <div>
-                <MolfileSvgRenderer
-                  id={`molSVG${index}`}
-                  width={120}
-                  molfile={mol.molfile}
-                />
+                {mol.molfile && (
+                  <MolfileSvgRenderer
+                    id={`molSVG${index}`}
+                    width={120}
+                    molfile={mol.molfile}
+                  />
+                )}
               </div>
               <p>
-                <MF mf={mol.mf} /> - {mol.mw.toFixed(2)}
+                <MF mf={mol.mf} /> - {mol.mw?.toFixed(2)}
               </p>
             </div>
           ))}
@@ -114,5 +118,3 @@ function MoleculeSelection(props: MoleculeSelectionProps) {
     </div>
   );
 }
-
-export default MoleculeSelection;
